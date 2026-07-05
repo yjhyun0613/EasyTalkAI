@@ -712,7 +712,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     if (!response.ok) {
-      throw new Error("네트워크 상태나 키 오류");
+      const errJson = await response.json().catch(() => ({}));
+      const msg = errJson.error?.message || `HTTP ${response.status} 에러`;
+      throw new Error(msg);
     }
 
     const resData = await response.json();
@@ -766,7 +768,9 @@ ${documentText}
     });
 
     if (!response.ok) {
-      throw new Error("네트워크 상태나 키 오류");
+      const errJson = await response.json().catch(() => ({}));
+      const msg = errJson.error?.message || `HTTP ${response.status} 에러`;
+      throw new Error(msg);
     }
 
     const resData = await response.json();
@@ -876,7 +880,7 @@ ${documentText}
               showToast("✨ AI 실시간 문서 분석이 완료되었습니다.");
             } catch (err) {
               console.error(err);
-              showToast("⚠️ 실시간 AI 연동 실패. 내장 시뮬레이터로 분석합니다.");
+              showToast(`⚠️ AI 연동 실패 (${err.message}). 내장 시뮬레이터로 분석합니다.`);
               analysisResult = runMockSimulator(textContent);
             }
           } else {
