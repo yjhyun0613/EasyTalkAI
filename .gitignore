@@ -15,3 +15,6 @@ desktop.ini
 # Agent files
 .gemini/
 .agents/
+
+# API Key Config File
+key.js

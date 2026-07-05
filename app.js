@@ -13,8 +13,8 @@ document.addEventListener('DOMContentLoaded', () => {
   let isChatListening = false;
   let chatRecognition = null;
 
-  // Gemini API Key
-  const DEFAULT_GEMINI_KEY = '';
+  // Gemini API Key (key.js가 있으면 로드, 없으면 공백)
+  const DEFAULT_GEMINI_KEY = typeof GEMINI_API_KEY !== 'undefined' ? GEMINI_API_KEY : '';
   let geminiApiKey = localStorage.getItem('gemini-api-key') || DEFAULT_GEMINI_KEY;
 
   // ================= DOM 요소 선택 =================
