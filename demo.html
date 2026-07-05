@@ -27,28 +27,34 @@
   <meta name="apple-mobile-web-app-title" content="쉽게말해 AI">
   <link rel="apple-touch-icon" href="app_icon.png">
 </head>
-<body>
+<body class="gemini-theme">
 
-  <!-- 상단 헤더 -->
-  <header>
-    <a href="index.html" class="logo-container" style="text-decoration: none; color: inherit;">    <!-- 접근성 도구 모음 -->
-    <div class="accessibility-panel">
-      <a href="index.html" class="btn-acc" style="text-decoration: none;">
-        <span>🏠</span> 홈으로 가기
+  <div class="app-layout">
+    <!-- 상단 헤더 -->
+    <header>
+      <a href="index.html" class="logo-container" style="text-decoration: none; color: inherit;">
+        <div class="logo-icon">말</div>
+        <div class="logo-text">쉽게말해 AI</div>
       </a>
-      <button id="toggle-large-font" class="btn-acc" aria-pressed="false">
-        <span>🔎</span> 큰 글씨 모드
-      </button>
-      <button id="toggle-high-contrast" class="btn-acc" aria-pressed="false">
-        <span>🌓</span> 고대비 모드
-      </button>
-      <button id="btn-open-settings" class="btn-acc" title="Gemini 설정">
-        <span>⚙️</span> 설정
-      </button>
-    </div>
-  </header>
+      
+      <!-- 접근성 도구 모음 -->
+      <div class="accessibility-panel">
+        <a href="index.html" class="btn-acc" style="text-decoration: none;">
+          <span>🏠</span> 홈으로 가기
+        </a>
+        <button id="toggle-large-font" class="btn-acc" aria-pressed="false">
+          <span>🔎</span> 큰 글씨 모드
+        </button>
+        <button id="toggle-high-contrast" class="btn-acc" aria-pressed="false">
+          <span>🌓</span> 고대비 모드
+        </button>
+        <button id="btn-open-settings" class="btn-acc" title="Gemini 설정">
+          <span>⚙️</span> 설정
+        </button>
+      </div>
+    </header>
 
-  <div class="container chat-first-layout">
+    <div class="container chat-first-layout">
     <!-- 대화 영역 -->
     <div class="chat-main-pane">
       <div id="chat-messages-container" class="chat-messages-list">
@@ -87,6 +93,7 @@
       </div>
     </div>
   </div>
+  </div> <!-- Close .app-layout -->
 
   <!-- ================= ⚙️ 설정 모달 ================= -->
   <div id="settings-modal" class="modal-overlay">
