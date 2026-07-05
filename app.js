@@ -30,6 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const btnChatSend = document.getElementById('btn-chat-send');
   const btnAttachFile = document.getElementById('btn-attach-file');
   const fileInput = document.getElementById('file-input');
+  const attachedFilePreview = document.getElementById('attached-file-preview');
   const privacyModal = document.getElementById('privacy-modal');
   const btnPrivacyAgree = document.getElementById('btn-privacy-agree');
 
