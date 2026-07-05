@@ -1558,7 +1558,7 @@ body.high-contrast footer {
 .chat-first-layout {
   display: flex;
   flex-direction: column;
-  height: calc(100vh - 85px); /* 헤더 제외 높이 */
+  flex: 1; /* Stretch to fill remaining space dynamically */
   width: 100%;
   max-width: 100%;
   margin: 0;
@@ -2006,12 +2006,13 @@ html, body {
   display: flex;
   flex-direction: column;
   height: 100vh;
+  height: 100dvh; /* Dynamic viewport height for mobile browsers */
   overflow: hidden;
 }
 
 /* Chat Layout Fullscreen style */
 .chat-first-layout {
-  height: calc(100vh - 85px); /* 100vh minus header height */
+  flex: 1; /* Automatically fill remaining screen space dynamically */
   width: 100%;
   max-width: 100%;
   margin: 0;
