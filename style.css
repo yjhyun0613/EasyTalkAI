@@ -1980,238 +1980,160 @@ body.high-contrast .btn-chat-bubble-action:hover {
   align-items: center;
 }
 
-.chat-typing-dot {
-  width: 8px;
-  height: 8px;
-  background-color: var(--text-muted);
-  border-radius: 50%;
-  animation: chatTypingBounce 1.4s infinite ease-in-out both;
-}
-
-.chat-typing-dot:nth-child(1) { animation-delay: -0.32s; }
-.chat-typing-dot:nth-child(2) { animation-delay: -0.16s; }
-
-@keyframes chatTypingBounce {
-  0%, 80%, 100% { transform: scale(0); }
-  40% { transform: scale(1.0); }
-}
-
-@media (max-width: 768px) {
-  .chat-first-layout {
-    height: calc(100vh - 75px);
-    border-left: none;
-    border-right: none;
-  }
-}
-
-/* ================= Google Gemini UI Inspired Sleek Dark Theme ================= */
-body.gemini-theme {
-  --bg-app: #131314; /* Deep dark background */
-  --bg-card: #1e1f20; /* Dark container background */
-  --text-primary: #e3e3e3; /* Light gray text */
-  --text-secondary: #c4c7c5; /* Lighter secondary text */
-  --text-muted: #8e918f;
-  --border-color: #282a2c;
-  
-  --primary: #a8c7fa; /* Soft light blue */
-  --primary-hover: #c2e7ff;
-  --primary-light: #282a2c;
-  --accent: #a8c7fa;
-  
-  background-color: var(--bg-app);
-  color: var(--text-primary);
-  height: 100vh;
+.chat-typing/* Prevent body/page scroll completely for a modern web app layout */
+html, body {
+  height: 100%;
   margin: 0;
   padding: 0;
-  overflow: hidden; /* Prevent body/page scroll completely */
+  overflow: hidden;
 }
 
-/* Force layout to fill screen and not scroll page */
-body.gemini-theme .app-layout {
+.app-layout {
   display: flex;
   flex-direction: column;
   height: 100vh;
   overflow: hidden;
-}
-
-body.gemini-theme header {
-  background-color: #131314;
-  border-bottom: 1px solid #282a2c;
-  color: #e3e3e3;
-  flex-shrink: 0;
-  height: 70px;
-  padding: 0.5rem 1.5rem;
-}
-
-body.gemini-theme .logo-text {
-  background: linear-gradient(135deg, #a8c7fa 0%, #c2e7ff 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-body.gemini-theme .logo-icon {
-  background: #1e3a8a;
-  color: #e3e3e3;
-}
-
-/* Gemini Theme - Accessibility buttons */
-body.gemini-theme .btn-acc {
-  background-color: #1e1f20;
-  border: 1px solid #282a2c;
-  color: #e3e3e3;
-}
-body.gemini-theme .btn-acc:hover {
-  background-color: #2a2b2d;
 }
 
 /* Chat Layout Fullscreen style */
-body.gemini-theme .chat-first-layout {
-  height: calc(100vh - 70px); /* 100vh minus header height */
-  max-width: 900px;
+.chat-first-layout {
+  height: calc(100vh - 85px); /* 100vh minus header height */
+  max-width: 850px;
   margin: 0 auto;
-  border: none;
-  box-shadow: none;
-  background-color: #131314;
+  background-color: var(--bg-card);
   display: flex;
   flex-direction: column;
   overflow: hidden;
 }
 
-body.gemini-theme .chat-main-pane {
+.chat-main-pane {
   flex: 1;
   display: flex;
   flex-direction: column;
   overflow: hidden;
 }
 
-/* Message List - Full Height and hidden outer scroll */
-body.gemini-theme .chat-messages-list {
-  background-color: #131314;
-  padding: 2rem 1.5rem 1rem 1.5rem;
+.chat-messages-list {
+  flex: 1;
   overflow-y: auto;
-  flex: 1;
+  padding: 1.5rem;
 }
 
-/* User Message bubble - rounded pill on right */
-body.gemini-theme .chat-msg.user .chat-msg-bubble {
-  background-color: #2a2b2d; /* Subtle dark gray for user chat bubble */
-  color: #e3e3e3;
-  border-radius: 20px;
-  border-top-right-radius: 4px;
-  border: none;
+/* ================= Gemini UI Inspired Pill-Shaped Input Bar ================= */
+.chat-input-bar-container {
+  background-color: var(--bg-card);
+  border-top: 1px solid var(--border-color);
+  padding: 1rem;
+  flex-shrink: 0;
 }
 
-/* AI Message - Clean list style without bubble (Gemini style) */
-body.gemini-theme .chat-msg.ai .chat-msg-bubble {
-  background-color: transparent; /* No bubble for AI response, like Gemini */
-  border: none;
-  box-shadow: none;
-  color: #e3e3e3;
-  padding: 0.5rem 0.5rem 0.5rem 0;
-}
-
-/* Card design in AI response */
-body.gemini-theme .chat-analysis-card {
-  background-color: #1e1f20; /* Dark card for the report */
-  border: 1px solid #282a2c;
-  color: #e3e3e3;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.25);
-  border-radius: 16px;
-}
-
-body.gemini-theme .analysis-card-section {
-  border-bottom: 1px dashed #282a2c;
-}
-
-body.gemini-theme .analysis-section-title {
-  color: #a8c7fa; /* Highlight titles with light blue */
-}
-
-body.gemini-theme .analysis-conclusion-text {
-  color: #e3e3e3;
-}
-
-body.gemini-theme .todo-item {
-  background-color: #2a2b2d;
-  color: #e3e3e3;
-  border: 1px solid #282a2c;
-}
-body.gemini-theme .todo-item:hover {
-  background-color: #333537;
-}
-
-body.gemini-theme .todo-text {
-  color: #e3e3e3;
-}
-
-/* Gemini Theme - Bottom input bar area floating above background */
-body.gemini-theme .chat-input-bar-container {
-  background-color: #131314;
-  border-top: none;
-  padding: 0.5rem 1.5rem 1.5rem 1.5rem;
-}
-
-/* Pill-shaped Input Bar wrapper */
-body.gemini-theme .chat-input-row {
-  background-color: #1e1f20;
+.chat-input-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: var(--bg-app); /* Subtle off-white/light gray background */
+  border: 1px solid var(--border-color);
   border-radius: 32px;
-  padding: 4px 8px 4px 16px;
-  border: 1px solid #2a2b2d;
+  padding: 6px 12px 6px 16px;
+  transition: var(--transition);
 }
 
-/* Inner input */
-body.gemini-theme .chat-text-input {
-  background-color: transparent;
+.chat-input-row:focus-within {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+.chat-text-input {
+  flex: 1;
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0.6rem 0 !important;
+  font-size: var(--size-body);
+  color: var(--text-primary);
+  outline: none;
+}
+
+.chat-input-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.btn-chat-mic-icon {
+  position: static !important; /* Remove absolute positioning */
+  background: none;
   border: none;
-  color: #e3e3e3;
-  padding: 0.7rem 45px 0.7rem 0;
-}
-body.gemini-theme .chat-text-input:focus {
-  box-shadow: none;
-  border: none;
-}
-
-/* Mic and Send buttons inside input row */
-body.gemini-theme .btn-chat-action {
-  background-color: transparent;
-  border: none;
-  color: #c4c7c5;
-}
-body.gemini-theme .btn-chat-action:hover {
-  background-color: #2a2b2d;
-  color: #ffffff;
-}
-
-body.gemini-theme .btn-chat-mic-icon {
-  color: #c4c7c5;
-}
-
-body.gemini-theme .btn-chat-send-icon {
-  background-color: #a8c7fa;
-  color: #131314;
-  width: 40px;
-  height: 40px;
-}
-body.gemini-theme .btn-chat-send-icon:hover {
-  background-color: #c2e7ff;
-}
-
-body.gemini-theme .chat-privacy-banner {
-  color: #8e918f;
+  font-size: 1.3rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
   justify-content: center;
+  color: var(--text-secondary);
+  transition: var(--transition);
 }
 
-/* Suggested chips */
-body.gemini-theme .suggested-question-chip,
-body.gemini-theme .example-chip {
-  background-color: #1e1f20;
-  border: 1px solid #282a2c;
-  color: #a8c7fa;
+.btn-chat-mic-icon:hover {
+  transform: scale(1.15);
 }
-body.gemini-theme .suggested-question-chip:hover,
-body.gemini-theme .example-chip:hover {
-  background-color: #2a2b2d;
+
+.btn-chat-send-icon {
+  background-color: var(--accent);
   color: #ffffff;
-  border-color: #a8c7fa;
+  border: none;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  font-size: 0.9rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+  flex-shrink: 0;
 }
 
+.btn-chat-send-icon:hover {
+  background-color: var(--primary-hover);
+  transform: scale(1.05);
+}
+
+.btn-chat-action {
+  background-color: transparent !important;
+  border: none !important;
+  width: auto !important;
+  height: auto !important;
+  padding: 4px !important;
+  font-size: 1.3rem !important;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--transition);
+  flex-shrink: 0;
+}
+
+.btn-chat-action:hover {
+  transform: scale(1.15);
+  background-color: transparent !important;
+}
+
+/* High contrast overrides for input row */
+body.high-contrast .chat-input-row {
+  background-color: #000;
+  border: 2px solid #fff;
+}
+body.high-contrast .chat-input-row:focus-within {
+  border-color: #ffff00;
+}
+body.high-contrast .btn-chat-send-icon {
+  background-color: #ffff00;
+  color: #000000;
+  border: 2px solid #ffff00;
+}
+body.high-contrast .btn-chat-send-icon:hover {
+  background-color: #ffffff;
+  color: #000000;
+}

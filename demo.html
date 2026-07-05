@@ -27,7 +27,7 @@
   <meta name="apple-mobile-web-app-title" content="쉽게말해 AI">
   <link rel="apple-touch-icon" href="app_icon.png">
 </head>
-<body class="gemini-theme">
+<body>
 
   <div class="app-layout">
     <!-- 상단 헤더 -->
@@ -81,14 +81,14 @@
           </button>
           <input type="file" id="file-input" style="display: none;" accept="image/*,application/pdf">
           
-          <!-- 텍스트 입력 및 마이크 -->
-          <div class="chat-input-wrapper">
-            <input type="text" id="chat-user-input" class="chat-text-input" placeholder="분석할 공문서 내용을 붙여넣거나 질문을 입력하세요...">
-            <button id="btn-chat-mic" class="btn-chat-mic-icon" title="음성으로 질문하기">🎤</button>
-          </div>
+          <!-- 텍스트 입력 -->
+          <input type="text" id="chat-user-input" class="chat-text-input" placeholder="분석할 공문서 내용을 붙여넣거나 질문을 입력하세요...">
           
-          <!-- 전송 버튼 -->
-          <button id="btn-chat-send" class="btn-chat-send-icon" title="전송">▶</button>
+          <!-- 마이크 및 전송 버튼 -->
+          <div class="chat-input-actions">
+            <button id="btn-chat-mic" class="btn-chat-mic-icon" title="음성으로 질문하기">🎤</button>
+            <button id="btn-chat-send" class="btn-chat-send-icon" title="전송">▶</button>
+          </div>
         </div>
       </div>
     </div>
