@@ -121,14 +121,9 @@ document.addEventListener('DOMContentLoaded', () => {
     showToast("⚙️ 설정이 성공적으로 저장되었습니다.");
   });
 
-  // 개인정보 동의 모달 최초 실행 제어 및 이벤트 처리
-  if (localStorage.getItem('privacy-consent-accepted') === 'true') {
-    if (privacyModal) privacyModal.classList.remove('active');
-  }
-
+  // 개인정보 동의 모달 이벤트 처리 (진입 시 노출)
   if (btnPrivacyAgree) {
     btnPrivacyAgree.addEventListener('click', () => {
-      localStorage.setItem('privacy-consent-accepted', 'true');
       if (privacyModal) privacyModal.classList.remove('active');
       showToast("🛡️ 개인정보 자동 마스킹 처리에 동의하셨습니다.");
     });
