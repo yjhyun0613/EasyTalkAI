@@ -678,7 +678,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // ================= AI 연동 API 함수 =================
   async function analyzeWithGemini(text, apiKey) {
-    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
     const systemPrompt = `당신은 복잡하고 어려운 공문서, 통지서, 고지서의 텍스트를 분석하여, 어르신이나 디지털 취약계층이 이해하기 쉬운 말로 요약하고 일정을 추출해 주는 "쉽게말해 AI" 비서입니다.
 반드시 아래 JSON 스키마 구조로만 답변하세요. 마크다운 백틱(\`\`\`json) 기호 없이 순수 JSON 문자열만 반환해야 합니다.
 
@@ -737,7 +737,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   async function chatWithGemini(chatHistory, userMessage, documentText, apiKey) {
-    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
     const systemPrompt = `당신은 사용자가 업로드한 공문서/고지서/안내문 정보를 기반으로 대화하는 친절한 "쉽게말해 AI" 비서입니다.
 사용자는 어르신이나 디지털 취약계층, 혹은 바쁜 일반 시민입니다. 어려운 행정용어나 한자어 대신 아주 알기 쉬운 한글 구어체(존댓말)로 친절하게 설명해 주셔야 합니다.
 답변할 때 줄바꿈과 굵은 글씨(**강조**)를 적절히 활용하여 시각적으로 읽기 편하게 만드세요.
