@@ -1559,20 +1559,17 @@ body.high-contrast footer {
   display: flex;
   flex-direction: column;
   height: calc(100vh - 85px); /* 헤더 제외 높이 */
-  max-width: 850px;
-  margin: 0 auto;
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
   padding: 0;
-  background-color: var(--bg-card);
-  border-left: 1px solid var(--border-color);
-  border-right: 1px solid var(--border-color);
-  box-shadow: var(--shadow-lg);
+  background-color: var(--bg-app);
   position: relative;
   overflow: hidden;
 }
 
 body.high-contrast .chat-first-layout {
-  border-left: 3px solid #fff;
-  border-right: 3px solid #fff;
+  /* 테두리 제거 */
 }
 
 .chat-main-pane {
@@ -1589,6 +1586,7 @@ body.high-contrast .chat-first-layout {
   padding: 1.5rem;
   display: flex;
   flex-direction: column;
+  align-items: center; /* Center the message column */
   gap: 1.5rem;
   background-color: var(--bg-app);
 }
@@ -1687,7 +1685,8 @@ body.high-contrast .attached-file-preview {
 .chat-msg {
   display: flex;
   flex-direction: column;
-  max-width: 85%;
+  width: 100%;
+  max-width: 800px; /* Center column width limit */
   animation: messageFadeIn 0.3s ease-out;
 }
 
@@ -1697,12 +1696,11 @@ body.high-contrast .attached-file-preview {
 }
 
 .chat-msg.user {
-  align-self: flex-end;
+  align-items: flex-end; /* Align user bubble to the right side of the column */
 }
 
 .chat-msg.ai {
-  align-self: flex-start;
-  max-width: 90%;
+  align-items: flex-start; /* Align AI bubble to the left side of the column */
 }
 
 .chat-msg-sender {
