@@ -2019,11 +2019,11 @@ html, body {
   padding: 1.5rem;
 }
 
-/* ================= Gemini UI Inspired Pill-Shaped Input Bar ================= */
+/* ================= Gemini UI Inspired Floating Island Input Bar ================= */
 .chat-input-bar-container {
-  background-color: var(--bg-card);
-  border-top: 1px solid var(--border-color);
-  padding: 1rem;
+  background-color: transparent !important;
+  border-top: none !important;
+  padding: 0.5rem 1.5rem 1.5rem 1.5rem;
   flex-shrink: 0;
 }
 
@@ -2031,16 +2031,20 @@ html, body {
   display: flex;
   align-items: center;
   gap: 10px;
-  background-color: var(--bg-app); /* Subtle off-white/light gray background */
+  background-color: #f0f4f9; /* Gemini's signature light gray-blue background */
   border: 1px solid var(--border-color);
-  border-radius: 32px;
-  padding: 6px 12px 6px 16px;
+  border-radius: 28px;
+  padding: 6px 12px 6px 20px;
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.08); /* Gorgeous floating shadow */
   transition: var(--transition);
+  max-width: 760px; /* Island width limit */
+  width: 100%;
+  margin: 0 auto; /* Center the island container */
 }
 
 .chat-input-row:focus-within {
   border-color: var(--accent);
-  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+  box-shadow: 0 8px 24px rgba(37, 99, 235, 0.12), 0 0 0 3px rgba(37, 99, 235, 0.15);
 }
 
 .chat-text-input {
