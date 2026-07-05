@@ -66,13 +66,6 @@
 
       <!-- 하단 입력바 및 안내 -->
       <div class="chat-input-bar-container">
-        <!-- 개인정보 활용 동의 -->
-        <div class="chat-privacy-banner">
-          <input type="checkbox" id="privacy-consent" class="privacy-checkbox" checked>
-          <label for="privacy-consent" class="privacy-label">
-            개인정보(주민등록번호, 주소 등)의 자동 마스킹 처리에 동의합니다. (필수)
-          </label>
-        </div>
 
         <div class="chat-input-row">
           <!-- 파일 업로드 버튼 -->
@@ -209,6 +202,25 @@
         </button>
         <button id="btn-share-copy" class="btn-modal-action" style="background: var(--bg-app); color: var(--text-primary); border: 1px solid var(--border-color);">
           <span>📋</span> 요약 텍스트 전체 복사하기
+        </button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- ================= 개인정보 동의 모달 (진입 시 최초 노출) ================= -->
+  <div id="privacy-modal" class="modal-overlay active">
+    <div class="modal-card" style="max-width: 450px; text-align: center; padding: 2rem;">
+      <div style="font-size: 3.5rem; margin-bottom: 1rem;">🛡️</div>
+      <h2 style="margin-bottom: 1rem; font-size: var(--size-h2);">개인정보 마스킹 동의</h2>
+      <p style="font-size: var(--size-body); color: var(--text-secondary); line-height: 1.6; margin-bottom: 1.5rem; text-align: left; background-color: var(--bg-app); padding: 12px; border-radius: var(--radius-sm); border: 1px solid var(--border-color);">
+        쉽게말해 AI는 사용자의 개인정보 보호를 위해 입력하거나 업로드하시는 문서에서 <strong>주민등록번호, 주소 등 민감한 개인 정보</strong>를 AI 전송 전에 자동으로 감지하여 가림(마스킹) 처리합니다.
+      </p>
+      <div style="font-size: var(--size-sub); color: var(--text-muted); margin-bottom: 1.5rem;">
+        * 본 마스킹 처리에 동의하셔야 서비스를 이용하실 수 있습니다.
+      </div>
+      <div class="modal-actions" style="justify-content: center; margin-top: 1rem;">
+        <button id="btn-privacy-agree" class="btn-modal-action btn-calendar-google" style="background: var(--accent); color: white; width: 100%; padding: 0.8rem; font-size: 1.05rem; font-weight: 700; border-radius: var(--radius-md);">
+          동의하고 시작하기
         </button>
       </div>
     </div>
