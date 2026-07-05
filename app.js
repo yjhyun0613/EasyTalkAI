@@ -1091,27 +1091,9 @@ ${documentText}
     
     const greetingText = `안녕하세요! 복잡하고 어려운 행정 공문서나 세금 고지서를 쉽게 해석해 드리는 **쉽게말해 AI** 비서입니다. 
     
-아래 **예시 버튼** 중 하나를 선택하시거나, 분석하고 싶은 글을 복사해 이곳에 입력해 주세요. 고지서 사진이나 PDF 파일을 복사해서 올려주셔도 깔끔하게 정리해 드립니다! 📄✨`;
+분석하고 싶은 글을 복사해 이곳에 입력해 주세요. 고지서 사진이나 PDF 파일을 복사해서 올려주셔도 깔끔하게 정리해 드립니다! 📄✨`;
     
-    const bubble = appendChatMessage('model', greetingText);
-    
-    // 예시 문서 칩 추가
-    const chipContainer = document.createElement('div');
-    chipContainer.className = 'example-chips-container';
-    chipContainer.innerHTML = `
-      <button class="example-chip" data-id="tax_notice">🚗 자동차세 납부 고지</button>
-      <button class="example-chip" data-id="reserve_forces">🪖 예비군 기본훈련 통지</button>
-      <button class="example-chip" data-id="health_checkup">🏥 일반 건강검진 안내</button>
-    `;
-    
-    chipContainer.querySelectorAll('.example-chip').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const docId = btn.getAttribute('data-id');
-        handleExampleTrigger(docId);
-      });
-    });
-
-    bubble.querySelector('.chat-msg-bubble').appendChild(chipContainer);
+    appendChatMessage('model', greetingText);
   }
 
   // 최초 인사말 호출
