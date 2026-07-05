@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>옵션 A: 전체 대화방 스타일 레이아웃 예시</title>
+  <style>
+    :root {
+      --bg-app: #f4f6f8;
+      --bg-card: #ffffff;
+      --primary: #1e3a8a;
+      --primary-light: #eff6ff;
+      --text-primary: #1e293b;
+      --text-secondary: #64748b;
+      --border-color: #e2e8f0;
+      --radius-lg: 16px;
+      --radius-md: 12px;
+      --accent: #2563eb;
+      --accent-light: #dbeafe;
+      --warning-bg: #fff7ed;
+      --warning-border: #ffedd5;
+      --warning-text: #ea580c;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-app);
+      color: var(--text-primary);
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      max-width: 480px;
+      margin: 0 auto;
+      border-left: 1px solid var(--border-color);
+      border-right: 1px solid var(--border-color);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+    }
+
+    header {
+      background-color: var(--primary);
+      color: white;
+      padding: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .header-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-acc {
+      background: rgba(255,255,255,0.15);
+      border: none;
+      color: white;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    /* 채팅방 영역 */
+    .chat-container {
+      flex: 1;
+      overflow-y: auto;
+      padding: 1.2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    .message {
+      display: flex;
+      flex-direction: column;
+      max-width: 85%;
+    }
+
+    .message.received {
+      align-self: flex-start;
+    }
+
+    .message.sent {
+      align-self: flex-end;
+    }
+
+    .message-sender {
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      margin-bottom: 4px;
+      margin-left: 8px;
+      font-weight: 600;
+    }
+
+    .message-bubble {
+      padding: 10px 14px;
+      border-radius: var(--radius-md);
+      font-size: 0.95rem;
+      line-height: 1.5;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+    }
+
+    .message.received .message-bubble {
+      background-color: var(--bg-card);
+      color: var(--text-primary);
+      border-top-left-radius: 4px;
+      border: 1px solid var(--border-color);
+    }
+
+    .message.sent .message-bubble {
+      background-color: var(--accent);
+      color: white;
+      border-top-right-radius: 4px;
+    }
+
+    /* 요약 카드 말풍선 위젯 */
+    .summary-widget {
+      background-color: var(--bg-card);
+      border: 2px solid var(--accent);
+      border-radius: var(--radius-lg);
+      padding: 1.2rem;
+      margin-top: 6px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      width: 100%;
+    }
+
+    .widget-header {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 0.8rem;
+    }
+
+    .badge {
+      background-color: var(--accent-light);
+      color: var(--accent);
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 6px;
+    }
+
+    .widget-title {
+      font-size: 1rem;
+      font-weight: 700;
+    }
+
+    .conclusion-text {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 0.8rem;
+      line-height: 1.4;
+    }
+
+    /* 체크리스트 */
+    .todo-list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 1rem;
+    }
+
+    .todo-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      font-size: 0.85rem;
+      line-height: 1.4;
+    }
+
+    .todo-checkbox {
+      margin-top: 3px;
+    }
+
+    /* 경고 영역 */
+    .warning-box {
+      background-color: var(--warning-bg);
+      border: 1px solid var(--warning-border);
+      border-radius: var(--radius-md);
+      padding: 0.8rem;
+      font-size: 0.8rem;
+      color: var(--warning-text);
+      margin-bottom: 1rem;
+      line-height: 1.4;
+    }
+
+    /* 액션 버튼 그룹 */
+    .widget-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    .btn-action {
+      background-color: #f1f5f9;
+      border: 1px solid var(--border-color);
+      color: var(--text-primary);
+      padding: 8px;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+    }
+
+    .btn-action.primary {
+      background-color: var(--primary);
+      color: white;
+      border: none;
+    }
+
+    /* 하단 입력창 */
+    .input-bar {
+      background-color: var(--bg-card);
+      border-top: 1px solid var(--border-color);
+      padding: 0.75rem 1rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      position: sticky;
+      bottom: 0;
+    }
+
+    .btn-attach {
+      background-color: #f1f5f9;
+      border: none;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      font-size: 1.2rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .input-wrapper {
+      flex: 1;
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .chat-input {
+      width: 100%;
+      background-color: #f1f5f9;
+      border: 1px solid var(--border-color);
+      border-radius: 20px;
+      padding: 10px 45px 10px 14px;
+      font-size: 0.9rem;
+      outline: none;
+    }
+
+    .btn-mic {
+      position: absolute;
+      right: 8px;
+      background: none;
+      border: none;
+      font-size: 1.2rem;
+      cursor: pointer;
+    }
+
+    .btn-send {
+      background-color: var(--accent);
+      color: white;
+      border: none;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      font-size: 1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 헤더 -->
+  <header>
+    <div class="header-title">
+      <span>💬</span> 쉽게말해 AI 비서
+    </div>
+    <div>
+      <button class="btn-acc">🔎 큰 글씨</button>
+    </div>
+  </header>
+
+  <!-- 대화 리스트 -->
+  <div class="chat-container">
+    
+    <!-- 시스템 최초 인사 -->
+    <div class="message received">
+      <div class="message-sender">쉽게말해 AI</div>
+      <div class="message-bubble">
+        안녕하세요! 어려운 공문서나 세금 고지서 내용을 이해하기 쉬운 말로 요약해 드립니다.<br><br>
+        사진을 직접 찍어 올리거나 복사한 문구를 입력창에 붙여넣어 주세요! 📷✍️
+      </div>
+    </div>
+
+    <!-- 유저 질문 -->
+    <div class="message sent">
+      <div class="message-bubble">
+        [사진 업로드] 지방세 고지서
+      </div>
+    </div>
+
+    <!-- AI 요약 응답 -->
+    <div class="message received">
+      <div class="message-sender">쉽게말해 AI</div>
+      <div class="message-bubble">
+        올려주신 고지서 분석 결과를 정리했습니다. 한눈에 확인해 보세요!
+      </div>
+      
+      <!-- 요약 위젯 카드 -->
+      <div class="summary-widget">
+        <div class="widget-header">
+          <span class="badge">지방세 납부 고지</span>
+          <span class="widget-title">자동차세 납부 안내</span>
+        </div>
+        <p class="conclusion-text">🚗 6월 30일까지 자동차세 125,000원을 내셔야 합니다.</p>
+        
+        <div class="todo-list">
+          <div class="todo-item">
+            <input type="checkbox" class="todo-checkbox" id="t1" checked>
+            <label for="t1">고지서 가상계좌번호 확인하기</label>
+          </div>
+          <div class="todo-item">
+            <input type="checkbox" class="todo-checkbox" id="t2">
+            <label for="t2">6월 30일 밤 11시 반 전까지 송금하기</label>
+          </div>
+        </div>
+
+        <div class="warning-box">
+          ⚠️ <strong>안 하면 어떻게 되나요?</strong><br>
+          기한을 하루라도 넘기면 3%의 가산금 벌금이 붙어 총 납부액이 올라갑니다.
+        </div>
+
+        <div class="widget-actions">
+          <button class="btn-action primary">📅 달력 등록</button>
+          <button class="btn-action">🔊 음성 듣기</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 유저 추가 질문 -->
+    <div class="message sent">
+      <div class="message-bubble">
+        가상계좌 정보가 어디 적혀 있어?
+      </div>
+    </div>
+
+    <!-- AI 추가 답변 -->
+    <div class="message received">
+      <div class="message-sender">쉽게말해 AI</div>
+      <div class="message-bubble">
+        보통 고지서 중간의 <strong>[납부 안내]</strong> 또는 <strong>[가상계좌번호]</strong> 표 안에 신한, 국민, 농협 등 여러 은행의 가상계좌번호가 나열되어 있습니다.<br><br>
+        원문 확인을 원하시면 아래 <strong>'원문 대조'</strong> 기능을 확인하시거나, 고지서 우측 하단 부분을 자세히 살펴보세요!
+      </div>
+    </div>
+
+  </div>
+
+  <!-- 하단 입력창 -->
+  <div class="input-bar">
+    <button class="btn-attach" title="파일 첨부">+</button>
+    <div class="input-wrapper">
+      <input type="text" class="chat-input" placeholder="질문을 입력하세요..." value="벌금은 얼마야?">
+      <button class="btn-mic">🎤</button>
+    </div>
+    <button class="btn-send">▶</button>
+  </div>
+
+</body>
+</html>

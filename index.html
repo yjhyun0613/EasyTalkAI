@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <script>
+    // 개발 및 업데이트 버전 간의 서비스 워커/캐시 꼬임 방지 스크립트
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.getRegistrations().then(function(registrations) {
+        if (registrations.length > 0) {
+          for (let registration of registrations) {
+            registration.unregister();
+          }
+          if ('caches' in window) {
+            caches.keys().then(function(names) {
+              for (let name of names) {
+                caches.delete(name);
+              }
+              window.location.reload(true);
+            });
+          }
+        }
+      });
+    }
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>쉽게말해 AI - 공문서·고지서 쉬운 말 요약 및 라이프 매니저</title>
+  <link rel="stylesheet" href="style.css">
+  
+  <!-- PWA 관련 설정 -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#1e3a8a">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="쉽게말해 AI">
+  <link rel="apple-touch-icon" href="app_icon.png">
+</head>
+<body>
+
+  <!-- 상단 헤더 -->
+  <header>
+    <div class="logo-container">
+      <div class="logo-icon">말</div>
+      <div class="logo-text">쉽게말해 AI</div>
+    </div>
+    
+    <!-- 메뉴 및 CTA -->
+    <div class="accessibility-panel">
+      <a href="demo.html" class="btn-acc active" style="text-decoration: none;">
+        <span>✨</span> 무료 데모 체험하기
+      </a>
+      <button id="toggle-large-font" class="btn-acc" aria-pressed="false">
+        <span>🔎</span> 큰 글씨 모드
+      </button>
+      <button id="toggle-high-contrast" class="btn-acc" aria-pressed="false">
+        <span>🌓</span> 고대비 모드
+      </button>
+    </div>
+  </header>
+
+  <!-- 히어로 섹션 -->
+  <section class="landing-hero">
+    <div class="container">
+      <span class="hero-tag">행정 비서 AI 서비스</span>
+      <h1 class="hero-main-title">
+        어려운 공문서와 세금 고지서,<br>
+        이제 <span style="color: var(--accent); text-decoration: underline;">쉽게말해 AI</span>가 해결해 드립니다.
+      </h1>
+      <p class="hero-sub-title">
+        세금 고지서, 예비군 소집 통지서, 국민건강검진 안내서 등 복잡한 행정 문서를 단 3초 만에 알기 쉬운 한글 요약, 실행 가능한 체크리스트, 스마트 일정 등록 파일로 변환해 드립니다.
+      </p>
+      <a href="demo.html" class="hero-cta-btn">
+        <span>🚀</span> 지금 무료로 체험해보기
+      </a>
+    </div>
+  </section>
+
+  <!-- 가치 설명 목업 영역 -->
+  <section class="container" style="margin-bottom: 5rem;">
+    <div class="card" style="padding: 2.5rem; text-align: center; background: linear-gradient(180deg, var(--bg-card) 0%, var(--bg-app) 100%);">
+      <h3 style="margin-bottom: 1.5rem; font-size: 1.6rem;">어려운 행정 문서를 이렇게 바꾸어 드립니다</h3>
+      
+      <!-- 예시 시각화 카드 비교 -->
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; text-align: left; margin-top: 1rem;">
+        <!-- 왼쪽: 복잡한 원문 목업 -->
+        <div class="card" style="margin-bottom: 0; padding: 1.5rem; border-color: var(--border-color); background: #f8fafc; opacity: 0.85;">
+          <h4 style="color: var(--text-muted); margin-bottom: 0.8rem; display: flex; align-items: center; gap: 8px;">
+            <span style="font-size: 1.2rem;">📄</span> 복잡하고 빽빽한 원문 문서
+          </h4>
+          <p style="font-size: 0.85rem; line-height: 1.6; color: var(--text-muted);">
+            "지방세법 제127조의 규정에 의하여 귀하의 소유 차량에 대하여 2026년 제1기분 자동차세를 아래와 같이 납세 고지하오니... 기한(2026.06.30) 내에 자진 납부 바라며, 경과 시 지방세징수법 제30조에 의거하여 3%의 가산금이 일할 부과되며... 이중 납부에 유의..."
+          </p>
+        </div>
+        <!-- 오른쪽: 쉽게말해 AI 요약 목업 -->
+        <div class="card" style="margin-bottom: 0; padding: 1.5rem; border-color: var(--accent); border-width: 2px; box-shadow: var(--shadow-lg);">
+          <h4 style="color: var(--accent); margin-bottom: 0.8rem; display: flex; align-items: center; gap: 8px;">
+            <span style="font-size: 1.2rem;">✨</span> 쉽게말해 AI가 요약한 카드
+          </h4>
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <span class="badge-doc-type" style="padding: 2px 8px; font-size: 0.75rem; margin-bottom: 2px;">지방세 납부 고지</span>
+            <strong style="font-size: 0.95rem; color: var(--text-primary);">6월 30일까지 자동차세 125,000원을 내셔야 합니다.</strong>
+            <span style="font-size: 0.8rem; color: var(--warning); font-weight: 600;">⚠️ 늦으면 3%의 연체 벌금이 추가됩니다.</span>
+            <span style="font-size: 0.8rem; color: var(--text-secondary);">✅ 해야할 일: 전용 가상계좌번호를 확인하여 기한 전 이체하기</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 핵심 기능 섹션 -->
+  <section class="landing-section" id="features">
+    <div class="container">
+      <div class="section-header">
+        <h2>어떤 기능이 있나요?</h2>
+        <p>복잡한 문서 해독부터 실생활 일정 등록까지 물 흐르듯 지원합니다.</p>
+      </div>
+
+      <div class="features-grid">
+        <!-- 1. 문자인식 -->
+        <div class="feature-card">
+          <div class="feature-icon-wrapper">📷</div>
+          <h3>간편한 사진 업로드 및 OCR</h3>
+          <p>종이 고지서 사진이나 모바일 캡처 이미지를 올리면, AI 문자인식(OCR) 기술을 이용해 텍스트를 즉시 추출합니다.</p>
+        </div>
+        <!-- 2. 쉬운 한글 요약 -->
+        <div class="feature-card">
+          <div class="feature-icon-wrapper">✨</div>
+          <h3>디지털 약자 맞춤 쉬운 말 요약</h3>
+          <p>어려운 한자어와 고압적인 공공 행정 용어를 '한 줄 결론'과 '해야 할 일' 위주의 친절하고 쉬운 한글로 재구성해 줍니다.</p>
+        </div>
+        <!-- 3. 일정 등록 -->
+        <div class="feature-card">
+          <div class="feature-icon-wrapper">📅</div>
+          <h3>원클릭 스마트 일정 연동</h3>
+          <p>중요한 마감 시한을 구글 캘린더나 아웃룩에 즉시 링크 연동하고, 휴대폰 캘린더 앱용 표준 일정 파일(.ics)을 즉시 내려받을 수 있습니다.</p>
+        </div>
+        <!-- 4. 접근성 및 공유 -->
+        <div class="feature-card">
+          <div class="feature-icon-wrapper">🔊</div>
+          <h3>음성 낭독(TTS) 및 보호자 공유</h3>
+          <p>요약된 내용을 한국어 음성으로 또렷하게 듣고, 혼자 처리가 힘든 어르신들은 자녀나 도우미 카카오톡으로 정리된 요약을 쉽게 공유할 수 있습니다.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 대상 고객 섹션 -->
+  <section class="landing-section" id="targets" style="background-color: var(--bg-card);">
+    <div class="container">
+      <div class="section-header">
+        <h2>이런 분들께 강력히 추천해 드립니다</h2>
+        <p>우리 주변의 모든 이웃이 행정 정보에서 소외되지 않도록 돕습니다.</p>
+      </div>
+
+      <div class="targets-grid">
+        <!-- 대상 1 -->
+        <div class="target-card">
+          <div class="target-header">
+            <span class="target-icon">👵👴</span>
+            <h3>고령자 및 실버 세대</h3>
+          </div>
+          <div class="target-body">
+            <p>시력이 침침해 작은 고지서 글씨가 잘 안 보이시거나, 복잡한 공공 행정 용어가 어렵게 느껴지는 부모님 세대를 위한 최고의 디지털 비서가 되어 드립니다.</p>
+          </div>
+        </div>
+        <!-- 대상 2 -->
+        <div class="target-card">
+          <div class="target-header">
+            <span class="target-icon">💼</span>
+            <h3>바쁜 1인 가구 및 직장인</h3>
+          </div>
+          <div class="target-body">
+            <p>우편함에 쌓이는 고지서를 꼼꼼히 챙길 시간조차 부족한 현대인들을 위해 핵심 일정만 쏙쏙 뽑아 달력에 바로 등록할 수 있는 생산성 도구입니다.</p>
+          </div>
+        </div>
+        <!-- 대상 3 -->
+        <div class="target-card">
+          <div class="target-header">
+            <span class="target-icon">🌐</span>
+            <h3>다문화 가정 및 외국인 주민</h3>
+          </div>
+          <div class="target-body">
+            <p>한국의 독특한 행정 시스템과 낯선 공문서 양식 때문에 처리가 막막했던 다문화 가족 구성원이 생활 정보와 체크리스트를 한글 기초 어휘로 쉽게 파악할 수 있습니다.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 구동 과정 섹션 -->
+  <section class="landing-section" id="steps">
+    <div class="container">
+      <div class="section-header">
+        <h2>어떻게 이용하나요?</h2>
+        <p>단 4단계의 간편한 흐름으로 이용할 수 있습니다.</p>
+      </div>
+
+      <div class="steps-grid">
+        <!-- 1단계 -->
+        <div class="step-card">
+          <div class="step-number">1</div>
+          <h4 style="margin: 0.8rem 0 0.5rem; font-size: 1.15rem;">문서 업로드</h4>
+          <p style="font-size: 0.85rem;">종이 문서를 스마트폰 카메라로 찍어 올리거나 문자/알림톡 복사 텍스트를 입력창에 붙여넣습니다.</p>
+        </div>
+        <!-- 2단계 -->
+        <div class="step-card">
+          <div class="step-number">2</div>
+          <h4 style="margin: 0.8rem 0 0.5rem; font-size: 1.15rem;">개인정보 안심 마스킹</h4>
+          <p style="font-size: 0.85rem;">이름, 연락처, 주민번호 등 중요 보안 사항이 자동 감지되어 화면에서 깔끔하게 가림 처리됩니다.</p>
+        </div>
+        <!-- 3단계 -->
+        <div class="step-card">
+          <div class="step-number">3</div>
+          <h4 style="margin: 0.8rem 0 0.5rem; font-size: 1.15rem;">AI 핵심 요약</h4>
+          <p style="font-size: 0.85rem;">AI 모델이 빽빽한 단어들을 행동 단위의 명쾌한 카드 형태로 실시간 재구성하여 보여줍니다.</p>
+        </div>
+        <!-- 4단계 -->
+        <div class="step-card">
+          <div class="step-number">4</div>
+          <h4 style="margin: 0.8rem 0 0.5rem; font-size: 1.15rem;">달력 등록 & 공유</h4>
+          <p style="font-size: 0.85rem;">요약을 한눈에 살핀 후, 내 일정표에 바로 마감일을 박아 넣고 자녀에게 공유하여 대리 처리를 손쉽게 부탁합니다.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 하단 CTA 배너 -->
+  <section class="container">
+    <div class="cta-banner">
+      <h2>더 이상 복잡한 고지서와 공문서로 곤란해하지 마세요</h2>
+      <p>쉽게말해 AI는 실생활 밀착형 공문 분석을 통해 모두가 정보를 평등하고 쉽게 파악할 수 있는 세상을 그립니다.</p>
+      <a href="demo.html" class="cta-banner-btn">지금 무료로 시작하기</a>
+    </div>
+  </section>
+
+  <!-- 푸터 -->
+  <footer>
+    <div class="container">
+      <p style="margin-bottom: 0.5rem; font-weight: 700;">쉽게말해 AI (Easily Say AI)</p>
+      <p>이용약관 | 개인정보처리방침 | 고객지원 센터</p>
+      <p style="margin-top: 1rem; opacity: 0.6;">© 2026 Easily Say AI. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const toggleLargeFontBtn = document.getElementById('toggle-large-font');
+      const toggleHighContrastBtn = document.getElementById('toggle-high-contrast');
+
+      // 큰 글씨 모드 토글
+      toggleLargeFontBtn.addEventListener('click', () => {
+        const isLarge = document.body.classList.toggle('large-font');
+        toggleLargeFontBtn.setAttribute('aria-pressed', isLarge);
+        toggleLargeFontBtn.classList.toggle('active', isLarge);
+      });
+
+      // 고대비 모드 토글
+      toggleHighContrastBtn.addEventListener('click', () => {
+        const isHC = document.body.classList.toggle('high-contrast');
+        toggleHighContrastBtn.setAttribute('aria-pressed', isHC);
+        toggleHighContrastBtn.classList.toggle('active', isHC);
+      });
+
+      // 서비스 워커 등록
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('./sw.js')
+          .then(reg => console.log('Service Worker registered successfully', reg))
+          .catch(err => console.error('Service Worker registration failed', err));
+      }
+    });
+  </script>
+</body>
+</html>
